@@ -8,14 +8,14 @@ export const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/send-email", {
+      const response = await fetch("http://localhost:3002/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           message,
-          signature, // Användarens e-postadress
+          signature,
         }),
       });
 

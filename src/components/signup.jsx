@@ -10,7 +10,7 @@ export const Signup = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    setError(null); // Rensa tidigare felmeddelanden
+    setError(null); 
     setSuccess(false);
 
     try {
@@ -19,18 +19,18 @@ export const Signup = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }), // Skicka användardata till backend
+        body: JSON.stringify({ email, password }), 
       });
 
       if (!response.ok) {
         throw new Error("Signup failed. Please try again.");
       }
 
-      setSuccess(true); // Visa framgångsmeddelande
-      setTimeout(() => navigate("/login"), 2000); // Omdirigera efter 2 sekunder
+      setSuccess(true); 
+      setTimeout(() => navigate("/login"), 2000); 
     } catch (err) {
       console.error("Signup failed:", err.message);
-      setError(err.message); // Visa felmeddelande
+      setError(err.message);
     }
   };
 
@@ -58,8 +58,10 @@ export const Signup = () => {
         </div>
         <button type="submit">Signup</button>
       </form>
-      {success && <p style={{ color: "green" }}>Signup successful! Redirecting...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>} {/* Visa fel */}
+      {success && (
+        <p style={{ color: "green" }}>Signup successful! Redirecting...</p>
+      )}
+      {error && <p style={{ color: "red" }}>{error}</p>} 
       <p>
         Already have an account? <Link to="/login">Login</Link>
       </p>

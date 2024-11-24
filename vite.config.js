@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/send-email": "http://localhost:3000", // Proxy för API-anrop till backend
+      "/send-email": "http://localhost:3002", // Proxy för API-anrop till backend
     },
   },
 });
