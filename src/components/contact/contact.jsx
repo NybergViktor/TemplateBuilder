@@ -8,7 +8,7 @@ export const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3002/send-email", {
+      const response = await fetch("http://localhost:3001/api/email/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

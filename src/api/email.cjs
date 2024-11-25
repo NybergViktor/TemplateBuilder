@@ -1,50 +1,30 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
-const cors = require("cors");
-require("dotenv").config({
-  path: "/Users/viktornyberg/VSCode/TemplateBuilder/.env",
-}); 
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
-
-app.use(
-  cors({
-    origin: "http://localhost:5173", 
-    methods: "GET,POST,PUT,DELETE", 
-    credentials: true, 
-  })
-);
+const router = express.Router();
 
 // API-endpoint för att skicka e-post
-app.post("/send-email", async (req, res) => {
+router.post("/send", async (req, res) => {
   const { message, signature } = req.body;
 
- 
   if (!message || !signature) {
     return res.status(400).send("Både meddelande och signatur måste anges.");
   }
 
-  
   const transporter = nodemailer.createTransport({
-    service: "gmail", 
+    service: "gmail",
     auth: {
-      user: process.env.EMAIL, 
-      pass: process.env.EMAIL_PASSWORD, 
+      user: process.env.EMAIL,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   try {
-    
     await transporter.sendMail({
-      from: signature, 
-      to: process.env.EMAIL, 
+      from: signature,
+      to: process.env.EMAIL,
       subject: "Meddelande från kontaktformulär",
       text: `Meddelande: ${message}`,
-      replyTo: signature, 
+      replyTo: signature,
     });
 
     res.status(200).send("E-post skickades framgångsrikt!");
@@ -54,8 +34,4 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
-// Starta servern
-const PORT = process.env.PORT || 3002;
-app.listen(PORT, () => {
-  console.log(`Servern körs på port ${PORT}`);
-});
+module.exports = router;

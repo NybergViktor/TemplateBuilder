@@ -1,0 +1,9 @@
+:root {
+  color-scheme: light dark;
+  background-color: #1a2328;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}

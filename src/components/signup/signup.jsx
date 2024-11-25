@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./signup.css";
+import { ReturnButton } from "../returnButton";
 
-export const Login = () => {
+export const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccess(false);
 
     try {
-      const response = await fetch("http://localhost:3001/login", {
+      const response = await fetch("http://localhost:3001/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,25 +25,22 @@ export const Login = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Invalid credentials. Please try again.");
+        throw new Error("Signup failed. Please try again.");
       }
 
-      const data = await response.json();
-      console.log("Login successful:", data);
-
-      localStorage.setItem("authToken", data.token);
-
-      navigate("/");
+      setSuccess(true);
+      setTimeout(() => navigate("/home"), 2000);
     } catch (err) {
-      console.error("Login failed:", err.message);
+      console.error("Signup failed:", err.message);
       setError(err.message);
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
+    <div className="signupMain">
+      <ReturnButton />
+      <h2>Skapa konto:</h2>
+      <form onSubmit={handleSignup}>
         <div>
           <input
             type="email"
@@ -52,18 +53,18 @@ export const Login = () => {
         <div>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="Lösenord"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Registrera</button>
       </form>
-      {error && <p style={{ color: "red" }}>{error}</p>} 
-      <p>
-        Don't have an account? <Link to="/signup">Sign up</Link>
-      </p>
+      {success && (
+        <p style={{ color: "green" }}>Signup successful! Redirecting...</p>
+      )}
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 };
