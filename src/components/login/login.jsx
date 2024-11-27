@@ -22,17 +22,17 @@ export const Login = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Invalid credentials. Please try again.");
+        throw new Error("Felaktiga uppgifter. Försök igen.");
       }
 
       const data = await response.json();
-      console.log("Login successful:", data);
 
       localStorage.setItem("authToken", data.token);
 
-      navigate("/");
+      if (response.ok) {
+        navigate("/home");
+      }
     } catch (err) {
-      console.error("Login failed:", err.message);
       setError(err.message);
     }
   };
@@ -40,34 +40,35 @@ export const Login = () => {
   return (
     <div className="mainMain">
       <div className="innerMain">
-          <h1>Välkommen</h1>
-          <h2>Logga in</h2>
-          <form onSubmit={handleLogin}>
-            <div>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                placeholder="Lösenord"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button type="submit">Logga in</button>
-          </form>
-          {error && <p style={{ color: "red" }}>{error}</p>}
-          <p>
-            Don't have an account? <Link to="/signup">Sign up</Link>
-          </p>
-        
+        <h1>Välkommen</h1>
+        <h2>Logga in</h2>
+        <form onSubmit={handleLogin}>
+          <div>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Lösenord"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit">
+            Logga in
+          </button>
+        </form>
+        {error && <p style={{ color: "red" }}>{error}</p>}
+        <p>
+          Skapa konto? <Link to="/signup">Registrera Konto</Link>
+        </p>
       </div>
     </div>
   );

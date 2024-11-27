@@ -25,20 +25,20 @@ export const Signup = () => {
       });
 
       if (!response.ok) {
-        throw new Error("Signup failed. Please try again.");
+        throw new Error("Registrering misslyckades. Försök igen.");
       }
 
       setSuccess(true);
       setTimeout(() => navigate("/home"), 2000);
     } catch (err) {
-      console.error("Signup failed:", err.message);
+      console.error("Registrering misslyckades:", err.message);
       setError(err.message);
     }
   };
 
   return (
     <div className="signupMain">
-      <ReturnButton />
+      <ReturnButton onClick={() => navigate("/login")} />
       <h2>Skapa konto:</h2>
       <form onSubmit={handleSignup}>
         <div>
@@ -62,7 +62,9 @@ export const Signup = () => {
         <button type="submit">Registrera</button>
       </form>
       {success && (
-        <p style={{ color: "green" }}>Signup successful! Redirecting...</p>
+        <p style={{ color: "green" }}>
+          Registrering lyckades! Du omdirigeras...
+        </p>
       )}
       {error && <p style={{ color: "red" }}>{error}</p>}
     </div>

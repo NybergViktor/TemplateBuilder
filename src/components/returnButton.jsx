@@ -1,4 +1,4 @@
-export const ReturnButton = () => {
+export const ReturnButton = ({ onClick }) => {
   const style = {
     backgroundColor: "black",
     position: "absolute",
@@ -10,5 +10,9 @@ export const ReturnButton = () => {
     border: "none",
     cursor: "pointer",
   };
-  return <button style={style}>Tillbaka</button>;
+  return (
+    <button onClick={onClick} style={style}>
+      Tillbaka
+    </button>
+  );
 };
