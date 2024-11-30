@@ -29,7 +29,7 @@ export const Signup = () => {
       }
 
       setSuccess(true);
-      setTimeout(() => navigate("/home"), 2000);
+      setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
       console.error("Registrering misslyckades:", err.message);
       setError(err.message);

@@ -67,16 +67,22 @@ router.post("/signup", async (req, res) => {
         return res.status(500).send("Kunde inte skapa användare.");
       }
 
-      res.status(201).json({ id: this.lastID });
-    });
-    res.json({
-      message: "Användare skapad",
-      user: { id: user.id, email: user.email },
+      // Hämta den nyligen skapade användaren från databasen
+      const selectSql = "SELECT id, email FROM users WHERE id = ?";
+      db.get(selectSql, [this.lastID], (err, newUser) => {
+        if (err) {
+          console.error("Fel vid hämtning av ny användare:", err.message);
+          return res.status(500).send("Kunde inte hämta användare.");
+        }
+
+        res.status(201).json({
+          message: "Användare skapad",
+          user: newUser, 
+        });
+      });
     });
   });
 });
-
-
 
 // get all users
 const verifyToken = require("../../middlewares/VerifyToken.cjs");

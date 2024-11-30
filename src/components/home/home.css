@@ -1,0 +1,64 @@
+/*<div>
+      <h2>TemplateBuilder</h2>
+      <main className="homeMain">
+        <div className="homeInnerMain">
+          <div className="settingsMain">
+            <div className="settings"></div>
+            <button>+</button>
+            <button>-</button>
+            <button>Ändra</button>
+          </div>
+          <div className="a4main">
+            <Page />
+          </div>
+        </div>
+        <button className="logoutButton" onClick={logout}>
+          Logga Ut
+        </button>
+      </main>
+    </div>*/
+
+.homeMain {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.homeInnerMain {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.a4main {
+  height: auto;
+  width: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  border: 2px solid white;
+}
+.settingsMain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+@media screen {
+  div.a4main {
+    margin: 5mm 5mm 5mm 10mm; /* printers usually have a bigger bottom margin*/
+  }
+}
+
+@media print {
+  div.a4main {
+    margin: 0mm; /* Browser will apply the correct margins when it prints */
+  }
+}

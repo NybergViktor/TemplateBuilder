@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./home.css";
+import { Page } from "../page/page";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -34,9 +36,22 @@ export const Home = () => {
   return (
     <div>
       <h2>TemplateBuilder</h2>
-      <button className="logoutButton" onClick={logout}>
-        Logga Ut
-      </button>
+      <main className="homeMain">
+        <div className="homeInnerMain">
+          <div className="settingsMain">
+            <div className="settings"></div>
+            <button>+</button>
+            <button>-</button>
+            <button>Ändra</button>
+          </div>
+          <div className="a4main">
+            <Page />
+          </div>
+        </div>
+        <button className="logoutButton" onClick={logout}>
+          Logga Ut
+        </button>
+      </main>
     </div>
   );
 };
