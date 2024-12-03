@@ -19,6 +19,7 @@
   flex-direction: column;
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
+  min-width: 300px;
 }
 .innerMain form {
   gap: 0.5rem;
@@ -52,4 +53,17 @@
 }
 .innerMain p :any-link {
   color: blue;
+}
+
+@media only screen and (max-width: 950px) {
+  .mainMain {
+    background-size: cover;
+  }
+}
+@media only screen and (max-width: 380px) {
+  .innerMain {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
 }

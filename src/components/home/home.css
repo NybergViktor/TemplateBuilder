@@ -38,7 +38,7 @@
   width: auto;
   overflow-x: scroll;
   overflow-y: scroll;
-  border: 2px solid white;
+  background-color: white;
 }
 .settingsMain {
   display: flex;
